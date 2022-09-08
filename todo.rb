@@ -67,6 +67,16 @@ end
 
 before do
   @storage = DatabasePersistence.new(logger)
+
+  new_value = nil 
+  Mongo::Logger.logger.level = ::Logger::FATAL
+  client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'todos')
+  client[:statistics].find(:key => 'requests').each { |doc| new_value = doc[:value] + 1}
+  client[:statistics].update_one({:key => 'requests'}, '$set' => {:value => new_value})
+
+  puts '---- BEGIN ----'
+  puts new_value
+  puts '---- END ----'
 end
 
 after do
