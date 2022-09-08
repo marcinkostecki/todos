@@ -4,6 +4,8 @@ require "tilt/erubis"
 
 require_relative "database_persistence"
 
+require "mongo"
+
 configure do
   enable :sessions
   set :session_secret, "secret"

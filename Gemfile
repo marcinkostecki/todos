@@ -12,6 +12,8 @@ gem "pry-byebug"
 
 gem "pg"
 
+gem "mongo"
+
 group :production do
   gem "puma"
 end
